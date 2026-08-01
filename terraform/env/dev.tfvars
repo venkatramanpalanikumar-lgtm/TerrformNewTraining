@@ -1,4 +1,4 @@
-resource_group_name = "rg-dev"
+resource_group_name = "terraformResearchGroup"
 location            = "East US"
 vnet_name           = "vnet-dev"
 vnet_address_space  = "10.0.0.0/16"
