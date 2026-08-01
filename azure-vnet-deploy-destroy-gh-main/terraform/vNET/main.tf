@@ -9,7 +9,7 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = var.subscription_id
+  subscription_id = "9ec3fcc8-dd85-44f0-8fac-d160b261efa1"
 }
 
 # Step 1: Create Resource Group
