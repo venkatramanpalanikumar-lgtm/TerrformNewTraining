@@ -31,16 +31,16 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init -backend-config="../backend-bootstrap/backend.tfvars"
-        working-directory: ./terraform/vNET
+        run: terraform init -backend-config="../backend-bootstrap/backend-dev.tfvars"
+        working-directory: ./terraform/vNET/dev
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
 
       - name: Terraform Plan (Destroy)
         run: terraform plan -destroy -var-file="../env/${{ github.event.inputs.environment }}.tfvars" -out=tfplan
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
 
       - name: Terraform Destroy
         run: |
@@ -49,4 +49,4 @@ jobs:
           else
             terraform destroy -var-file="../env/${{ github.event.inputs.environment }}.tfvars"
           fi
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev

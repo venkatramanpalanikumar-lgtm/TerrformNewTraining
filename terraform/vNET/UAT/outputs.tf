@@ -10,6 +10,7 @@ output "subnet_names" {
   value = [
     azurerm_subnet.web.name,
     azurerm_subnet.app.name,
-    azurerm_subnet.db.name
+    azurerm_subnet.db.name,
+    azurerm_subnet.devaps.name
   ]
 }

@@ -31,12 +31,12 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init -backend-config="../backend-bootstrap/backend.tfvars"
-        working-directory: ./terraform/vNET
+        run: terraform init -backend-config="../backend-bootstrap/backend-dev.tfvars"
+        working-directory: ./terraform/vNET/dev
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
       
       - name: Debug Confirm tfvars file
         run: |
@@ -49,12 +49,12 @@ jobs:
             echo "❌ tfvars file NOT found"
             exit 1
           fi
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
   
 
       - name: Terraform Plan
         run: terraform plan -var-file="../env/${{ github.event.inputs.environment }}.tfvars" -out=tfplan
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
 
       - name: Terraform Apply
         run: |
@@ -63,8 +63,8 @@ jobs:
           else
             terraform apply tfplan
           fi
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
 
       - name: Capture Terraform Outputs
         run: terraform output -json > vnet_outputs.json
-        working-directory: ./terraform/vNET
+        working-directory: ./terraform/vNET/dev
