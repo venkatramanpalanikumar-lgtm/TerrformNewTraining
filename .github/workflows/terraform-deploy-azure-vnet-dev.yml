@@ -1,4 +1,4 @@
-name: Deploy Azure VNet with Terraform
+name: Deploy Azure VNet with Terraform for dev environment
 
 on:
   workflow_dispatch:

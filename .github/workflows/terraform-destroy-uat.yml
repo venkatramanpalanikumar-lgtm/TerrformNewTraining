@@ -1,4 +1,4 @@
-name: Destroy Azure VNet with Terraform
+name: Destroy Azure VNet with Terraform for UAT environment
 
 on:
   workflow_dispatch:
