@@ -6,7 +6,7 @@ on:
       environment:
         description: 'Deployment environment (e.g., dev, prod)'
         required: true
-        default: 'uat'
+        default: 'UAT'
       auto_approve:
         description: 'Auto-approve Terraform apply'
         required: true
