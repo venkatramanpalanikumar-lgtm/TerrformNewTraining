@@ -6,7 +6,7 @@ on:
       environment:
         description: 'Environment to destroy (e.g., dev, prod)'
         required: true
-        default: 'uat'
+        default: 'UAT'
       auto_approve:
         description: 'Auto-approve destroy'
         required: true
@@ -31,7 +31,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init -backend-config="../backend-bootstrap/backend-uat.tfvars"
+        run: terraform init -backend-config="../../backend-bootstrap/backend-uat.tfvars"
         working-directory: ./terraform/vNET/UAT
 
       - name: Terraform Validate
@@ -39,14 +39,14 @@ jobs:
         working-directory: ./terraform/vNET/UAT 
 
       - name: Terraform Plan (Destroy)
-        run: terraform plan -destroy -var-file="../env/${{ github.event.inputs.environment }}.tfvars" -out=tfplan
+        run: terraform plan -destroy -var-file="../../env/${{ github.event.inputs.environment }}.tfvars" -out=tfplan
         working-directory: ./terraform/vNET/UAT 
 
       - name: Terraform Destroy
         run: |
           if [ "${{ github.event.inputs.auto_approve }}" == "true" ]; then
-            terraform destroy -auto-approve -var-file="../env/${{ github.event.inputs.environment }}.tfvars"
+            terraform destroy -auto-approve -var-file="../../env/${{ github.event.inputs.environment }}.tfvars"
           else
-            terraform destroy -var-file="../env/${{ github.event.inputs.environment }}.tfvars"
+            terraform destroy -var-file="../../env/${{ github.event.inputs.environment }}.tfvars"
           fi
         working-directory: ./terraform/vNET/UAT
